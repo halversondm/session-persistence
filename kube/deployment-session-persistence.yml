@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: session-persistence
+  name: session-persistence
+  namespace: session-persistence
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: session-persistence
+  strategy: { }
+  template:
+    metadata:
+      labels:
+        app: session-persistence
+    spec:
+      containers:
+        - image: halversondm/session-persistence:1.0.0
+          imagePullPolicy: Never
+          name: session-persistence
+          resources: { }
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/health
+            initialDelaySeconds: 30
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/health
+            initialDelaySeconds: 30
+          ports:
+            - containerPort: 8080
+          env:
+            - name: JAVA_OPTS
+              value: ""
+            - name: JAR_FILE
+              value: "session-persistence.jar"

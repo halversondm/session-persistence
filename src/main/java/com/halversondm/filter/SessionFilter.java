@@ -24,7 +24,9 @@ public class SessionFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession(false);
 
-        if (session == null) {
+        if (request.getRequestURI().contains("actuator")) {
+            filterChain.doFilter(servletRequest, servletResponse);
+        } else if (session == null) {
             session = request.getSession(true);
             AppSessionData appSessionData = new AppSessionData();
             appSessionData.setName(request.getRemoteUser() == null ? "no user provided" : request.getRemoteUser());
