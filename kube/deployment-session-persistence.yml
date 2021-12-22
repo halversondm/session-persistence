@@ -35,6 +35,6 @@ spec:
             - containerPort: 8080
           env:
             - name: JAVA_OPTS
-              value: ""
+              value: -Dspring.profiles.active=prod
             - name: JAR_FILE
               value: "session-persistence.jar"
