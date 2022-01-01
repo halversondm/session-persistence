@@ -14,7 +14,7 @@
 	<name>Session Persistence</name>
 	<description>Demo project for Session Persistence</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
